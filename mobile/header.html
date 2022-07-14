@@ -1,0 +1,233 @@
+<!-- UI-->
+<!--dele: content below primary navi-->
+<script type="text/x-handlebars" data-template-name="/user/summary"></script>
+<!-- expand btn disable :: ui whole page -->
+<script type="text/x-handlebars" data-template-name="user">
+      {{plugin-outlet name="above-user-profile" connectorTagName="div" args=(hash model=model)}}
+    <div class="container {{if viewingSelf "viewing-self"}} {{if model.profile_hidden "profile-hidden"}} {{primaryGroup}}">
+      {{#d-section class="user-main"}}
+        <section class="{{if collapsedInfo "collapsed-info"}} about {{if hasProfileBackgroundUrl "has-background" "no-background"}}" >
+          <div class="details">
+            <div class="primary">
+              {{plugin-outlet name="before-user-profile-avatar" args=(hash model=model)}}
+              {{user-profile-avatar user=model tagName=""}}
+               <!--用户名-->
+              <div class="primary-textual">
+                  <div class="user-profile-names">
+            <h1 class={{if nameFirst "full-name" "username"}}>{{if nameFirst model.name (format-username model.username)}} {{user-status model currentUser=currentUser}}</h1>
+            <!-- <h2 class={{if nameFirst "username" "full-name"}}>{{#if nameFirst}}{{model.username}}{{else}}{{model.name}}{{/if}}</h2> -->
+            <h2>
+                <!-- 简介  -->
+              <div class="biofont">
+                {{#if isNotSuspendedOrIsStaff}}
+                {{#html-with-links}}
+                  <span>简介：</span>{{html-safe model.bio_cooked}}
+                {{/html-with-links}}
+                {{/if}}
+              </div>
+            </h2>
+            {{#if model.staged}}
+              <h2 class="staged">{{i18n "user.staged"}}</h2>
+            {{/if}}
+            {{#if model.title}}
+              <h3>{{model.title}}</h3>
+            {{/if}}
+            {{plugin-outlet name="user-post-names" tagName="span" connectorTagName="div" args=(hash model=model)}}
+          </div>
+          {{plugin-outlet name="user-profile-primary" tagName="span" connectorTagName="div" args=(hash model=model)}}
+        </div>
+            </div>
+            {{plugin-outlet name="user-profile-above-collapsed-info" args=(hash model=model collapsedInfo=collapsedInfo)}}
+          </div>
+        </section>
+        <!-- ****************************  -->
+        <div class="my-detail-class">
+                <!-- unknown-->
+          <!-- {{#unless collapsedInfo}} -->
+          {{#if showStaffCounters}}
+          <div class="staff-counters">
+              {{#if model.number_of_flags_given}}
+                <div><span class="helpful-flags">{{model.number_of_flags_given}}</span>{{i18n "user.staff_counters.flags_given"}}</div>
+              {{/if}}
+              {{#if model.number_of_flagged_posts}}
+                <div>
+                  {{#link-to "review" (query-params username=model.username status="all" type="ReviewableFlaggedPost")}}
+                    <span class="flagged-posts">{{model.number_of_flagged_posts}}</span>{{i18n "user.staff_counters.flagged_posts"}}
+                  {{/link-to}}
+                </div>
+              {{/if}}
+              {{#if model.number_of_rejected_posts}}
+                <div>
+                  {{#link-to "review" (query-params username=model.username status="rejected" type="ReviewableQueuedPost")}}
+                    <span class="flagged-posts">{{model.number_of_rejected_posts}}</span>{{i18n "user.staff_counters.rejected_posts"}}
+                  {{/link-to}}
+                </div>
+              {{/if}}
+              {{#if model.number_of_deleted_posts}}
+                <div>
+                  {{#link-to "user.deletedPosts" model}}
+                    <span class="deleted-posts">{{model.number_of_deleted_posts}}</span>{{i18n "user.staff_counters.deleted_posts"}}
+                  {{/link-to}}
+                </div>
+              {{/if}}
+              {{#if model.number_of_suspensions}}
+                <div>
+                  <a href {{action "showSuspensions"}}>
+                    <span class="suspensions">{{model.number_of_suspensions}}</span>{{i18n "user.staff_counters.suspensions"}}
+                  </a>
+                </div>
+              {{/if}}
+              {{#if model.warnings_received_count}}
+                <div>
+                  {{#link-to "userPrivateMessages.warnings" model}}
+                    <span class="warnings-received">{{model.warnings_received_count}}</span>{{i18n "user.staff_counters.warnings_received"}}
+                  {{/link-to}}
+                </div>
+              {{/if}}
+          </div>
+          {{/if}}
+          <!--背景图-->
+          <div class="user-profile-image" style={{model.profileBackgroundUrl}}></div>
+        <!-- {{/unless}} -->
+        <!--end-->
+        <div class='bio'>
+          {{#if model.suspended}}
+            <div class='suspended'>
+              {{d-icon "ban"}}
+              <b>
+                {{#if model.suspendedForever}}
+                  {{i18n 'user.suspended_permanently'}}
+                {{else}}
+                  {{i18n 'user.suspended_notice' date=model.suspendedTillDate}}
+                {{/if}}
+              </b>
+              <br>
+              {{#if model.suspend_reason}}
+                <b>{{i18n 'user.suspended_reason'}}</b> {{model.suspend_reason}}
+              {{/if}}
+            </div>
+          {{/if}}
+        </div>
+        {{#if publicUserFields}}
+          <div class="public-user-fields">
+            {{#each publicUserFields as |uf|}}
+              {{#if uf.value}}
+                <div class="public-user-field {{uf.field.dasherized_name}}">
+                  <span class="user-field-name">{{uf.field.name}}</span>:
+                  <span class="user-field-value">
+                    {{#each uf.value as |v|}} {{! some values are arrays }}
+                      <span class="user-field-value-list-item">{{v}}</span>
+                    {{else }}
+                      {{uf.value}}
+                    {{/each}}
+                  </span>
+                </div>
+              {{/if}}
+            {{/each}}
+            {{plugin-outlet name="user-profile-public-fields" tagName="span" connectorTagName="div"
+                            args=(hash publicUserFields=publicUserFields
+                                  model=model)}}
+          </div>
+        {{/if}}
+        <!-- 大概是置顶话题 -->
+        {{#if showFeaturedTopic}}
+        <h3 class="featured-topic">
+          <span>{{i18n "user.featured_topic"}}</span>
+          {{#link-to "topic" model.featured_topic.slug model.featured_topic.id}}{{html-safe (replace-emoji model.featured_topic.fancy_title)}}{{/link-to}}
+        </h3>
+      {{/if}}
+      <!--你填的链接-->
+      <h3 class="location-and-website">
+        {{#if model.location}}<div class="user-profile-location">{{d-icon "map-marker-alt"}} {{model.location}}</div>{{/if}}
+        {{#if model.website_name}}
+          <div class="user-profile-website">
+            {{d-icon "globe"}}
+            {{#if linkWebsite}}
+              {{!-- template-lint-disable  --}}
+              <a href={{model.website}} rel="noopener {{unless removeNoFollow 'nofollow ugc'}}" target="_blank">{{model.website_name}}</a>
+            {{else}}
+              <span title={{model.website}}>{{model.website_name}}</span>
+            {{/if}}
+          </div>
+        {{/if}}
+        {{plugin-outlet name="user-location-and-website" tagName="span" connectorTagName="div" args=(hash model=model)}}
+      </h3>
+      <div>
+        <!--原下拉栏  账号详情和添加的粉丝栏等-->
+        <div class='secondary'id='collapsed-info-panel'>
+          <dl>
+             {{#if model.created_at}}
+              <div><dt>{{i18n 'user.created'}}</dt><dd>{{bound-date model.created_at}}</dd></div>
+            {{/if}}
+            {{#if model.last_posted_at}}
+              <div><dt>{{i18n 'user.last_posted'}}</dt><dd>{{bound-date model.last_posted_at}}</dd></div>
+            {{/if}}
+            {{#if model.last_seen_at}}
+              <div><dt>{{i18n 'user.last_seen'}}</dt><dd>{{bound-date model.last_seen_at}}</dd></div>
+            {{/if}}
+            {{#if model.profile_view_count}}
+              <div><dt>{{i18n 'views'}}</dt><dd>{{model.profile_view_count}}</dd></div>
+            {{/if}}
+            {{#if model.invited_by}}
+              <div><dt class="invited-by">{{i18n 'user.invited_by'}}</dt><dd class="invited-by">{{#link-to 'user' model.invited_by}}{{model.invited_by.username}}{{/link-to}}</dd></div>
+            {{/if}}
+            {{#if model.trust_level}}
+              <div><dt class="trust-level">{{i18n 'user.trust_level'}}</dt><dd class="trust-level">{{model.trustLevel.name}}</dd></div>
+            {{/if}}
+            {{#if canCheckEmails}}
+              <div><dt>{{i18n 'user.email.title'}}</dt>
+              <dd title={{model.email}}>
+                {{#if model.email}}
+                  {{model.email}}
+                {{else}}
+                  {{d-button action=(route-action "checkEmail") actionParam=model icon="far-envelope" label="admin.users.check_email.text" class="btn-primary"}}
+                {{/if}}
+              </dd>
+              </div>
+            {{/if}}
+            {{#if model.displayGroups}}
+              <div><dt class="groups">{{i18n 'groups.title' count=model.displayGroups.length}}</dt>
+              <dd class='groups'>
+                {{#each model.displayGroups as |group|}}
+                  <span>{{#link-to 'group' group.name class="group-link"}}{{group.name}}{{/link-to}}</span>
+                {{/each}}
+
+                {{#link-to "groups" (query-params username=model.username)}}
+                  ...
+                {{/link-to}}
+              </dd>
+              </div>
+            {{/if}}
+            {{#if canDeleteUser}}
+              <div class='pull-right'>{{d-button action=(action "adminDelete") icon="exclamation-triangle" label="user.admin_delete" class="btn-danger"}}</div>
+            {{/if}}
+          </dl>
+          <div class="mybox-stlye">
+          {{plugin-outlet name="user-profile-secondary" tagName="span" connectorTagName="div" args=(hash model=model)}}
+          </div>
+        </div>
+     </div>
+    </div>
+        <!--导航栏-->
+      <div class='user-content-wrapper'>
+        <section class="user-primary-navigation">
+
+              <!--概要 all-->
+              {{#d-navigation-item route="userActivity.index"}}{{i18n "user.filters.all"}}{{/d-navigation-item}}
+              <!--topic-->
+              {{#d-navigation-item route="userActivity.topics"}}{{i18n "user_action_groups.4"}}{{/d-navigation-item}}
+              <!--足迹 read   -->
+              {{#d-navigation-item route="userActivity.read"  title=(i18n "user.read_help")}}{{i18n "user.read"}}{{/d-navigation-item}}
+               <!--书签 bookmark-->
+               {{#d-navigation-item route="userActivity.bookmarks"}}{{i18n "user_action_groups.3"}}{{/d-navigation-item}}
+              <!--喜欢 like -->
+              {{#d-navigation-item route="userActivity.likesGiven"}}{{i18n "user_action_groups.1"}}{{/d-navigation-item}}
+               <!--消息 -->
+               {{#d-navigation-item route="userPrivateMessages"}}{{i18n "user.messages.inbox"}}{{/d-navigation-item}}
+
+        </section>
+        {{outlet}}
+    </div>
+  {{/d-section}}
+  </div>
+</script>
