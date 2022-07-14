@@ -1,0 +1,101 @@
+/*ui-infoDetails*/
+.user-main .about .secondary dl {
+  margin-left: 10px;
+}
+.my-detail-class {
+  background-color: var(--secondary);
+  padding: 5%;
+  padding-bottom: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.my-detail-class dd {
+  padding: 0;
+  color: var(--primary);
+  display: inline-flex;
+}
+.my-detail-class dt {
+  color: var(--secondary-medium);
+  display: inline-flex;
+}
+.my-detail-class div {
+  line-height: 1%;
+  display: inline-block;
+}
+.mybox-stlye div {
+  display: inline-block;
+  margin-inline: 5%;
+}
+.biofont {
+  margin-top: 0;
+  font-size: small;
+  font-weight: 400;
+}
+.biofont span {
+  font-weight: 300;
+  display: inline-flex;
+}
+.biofont p {
+  display: inline-flex;
+}
+.user-main .about .details .primary {
+  margin-top: 5%;
+}
+.user-main .collapsed-info.about .details {
+  padding: 5%;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-right: 1%;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  background-color: var(--secondary);
+}
+.user-main .about.collapsed-info .details .primary .avatar {
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+.mobile-nav {
+  line-height: 55px;
+  margin: 10%;
+}
+#main-outlet-wrapper {
+  background-color: #ededed;
+}
+.user-content-wrapper .user-additional-controls + .user-content,
+.user-content-wrapper .user-secondary-navigation + .user-content {
+  grid-column-start: 1;
+  border-radius: 5%;
+  padding: 15px;
+}
+
+/***/
+.mobile-nav {
+  list-style: none;
+  border: none;
+  color: var(--primary);
+  font-size: var(--font-up-1);
+  line-height: var(--line-height-small);
+  display: flex;
+  transition: background-color 0.2s, color 0.2s;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 5%;
+}
+.user-content-wrapper .user-primary-navigation {
+  border-bottom-right-radius: 10%;
+  border-bottom-left-radius: 10%;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  padding-right: 3%;
+  padding-left: 3%;
+}
+
+/* content*/
+.user-main .user-content {
+  padding: 5%;
+  border-radius: 5%;
+}
