@@ -638,7 +638,6 @@
 
   {{plugin-outlet name="user-custom-controls" tagName="span" connectorTagName="div" args=(hash model=model)}}
 
-  {{#if canSaveUser}}
   {{save-controls model=model action=(action "save") saved=saved}}
-  {{/if}}
+
 </script>
