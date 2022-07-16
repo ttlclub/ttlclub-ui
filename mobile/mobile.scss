@@ -42,7 +42,7 @@
   display: inline-flex;
 }
 .user-main .about .details .primary {
-  margin-top: 5%;
+  margin-top: 1%;
 }
 .user-main .collapsed-info.about .details {
   padding: 5%;
@@ -89,9 +89,40 @@
   background-color: var(--quaternary);
   border-radius: 10px;
   transition: all 0.3s linear;
+  display: inline-block;
+  padding-left: 8%;
+  padding-right: 8%;
 }
 /* navi-outlet-content*/
 .user-main .user-content {
   padding: 5%;
   border-radius: 10;
+}
+/*other's ui*/
+.others-topics .mobile-nav li {
+  display: none;
+}
+.others-topics .summary {
+  background-color: white;
+  padding: 5%;
+  padding-left: 8%;
+  font-size: large;
+  font-weight: 800;
+  list-style: none;
+}
+
+.others-topics li a {
+  display: inline-block;
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 10px;
+}
+.others-topics li a.active {
+  color: var(--secondary);
+  background-color: var(--quaternary);
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  display: inline-block;
+  padding-left: 8%;
+  padding-right: 8%;
 }
