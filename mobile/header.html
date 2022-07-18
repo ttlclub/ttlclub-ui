@@ -1,0 +1,20 @@
+<!--修改页面定向-->
+<!-- 前者看自己，后者看别人-->
+<script type="text/discourse-plugin" version="0.8">
+  api.modifyClass('route:user', {
+    pluginId:"my-user-route",
+    redirect(){
+      const { currentUser } = this;
+      const viewingMe =
+        currentUser &&
+        currentUser.get("username") === this.modelFor("user").get("username");
+      const destination = viewingMe ? "user.summary" : "userActivity.topics";
+
+      if (this.site.mobileView) {
+        this.replaceWith(destination);
+      } else {
+        this.transitionTo(destination);
+      }
+    },
+  });
+</script>
