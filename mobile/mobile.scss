@@ -1,0 +1,145 @@
+/*ui-infoDetails*/
+.user-main .about .secondary dl {
+  padding-left: 5%;
+  background-color: white;
+  border-bottom-right-radius: 2em;
+  border-bottom-left-radius: 2em;
+}
+.user-main .about .details .primary {
+  background-color: white;
+}
+////////////////////////////
+.mobile-nav {
+  line-height: 50px;
+  margin: 5%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+#main-outlet-wrapper {
+  background-color: var(--primary-50);
+}
+.user-content-wrapper .user-additional-controls + .user-content,
+.user-content-wrapper .user-secondary-navigation + .user-content {
+  grid-column-start: 1;
+  border-radius: 2em;
+  padding: 15px;
+}
+
+/*mian-navi bar*/
+.user-content-wrapper {
+  background-color: white;
+  margin-top: 3%;
+  border-radius: 2em !important;
+  column-gap: 2px;
+}
+.mobile-nav li {
+  border-bottom: solid var(--primary-500) 0.1px;
+}
+.mobile-nav li a.active {
+  color: var(--secondary);
+  background-color: var(--quaternary);
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  display: inline-block;
+  padding-left: 8%;
+  padding-right: 8%;
+}
+.user-content-wrapper .user-primary-navigation {
+  grid-column-end: 3;
+}
+
+/* navi-outlet-content*/
+.my-outlet-page {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.my-outlet-page .user-secondary-navigation li {
+  display: inline-block;
+  padding: 5%;
+  padding-bottom: 0;
+  padding-top: 0;
+  border-bottom: none;
+}
+.my-outlet-page .mobile-nav {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 0;
+}
+.my-outlet-page a {
+  text-align: center;
+}
+.my-outlet-page a.active {
+  min-width: 100px;
+  text-align: center;
+}
+.my-return-btn {
+  background-color: var(--quaternary);
+  padding: 2%;
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 2em;
+  border: 0ch;
+  position: fixed;
+  bottom: 6em;
+  right: 3em;
+  z-index: 888;
+  opacity: 75%;
+}
+.my-return-btn a {
+  color: white;
+  font-size: x-large;
+  font-weight: 1000;
+}
+/*other's ui*/
+.user-main .user-content {
+  padding: 5%;
+  padding-top: 1%;
+  border-bottom-left-radius: 2em;
+  border-bottom-right-radius: 2em;
+}
+.others-topics .mobile-nav li {
+  display: none;
+}
+.others-topics .summary {
+  background-color: white;
+  padding: 5%;
+  padding-left: 8%;
+  font-size: large;
+  font-weight: 800;
+  list-style: none;
+}
+
+.others-topics li a {
+  display: inline-block;
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 10px;
+}
+.others-topics li a.active {
+  color: var(--secondary);
+  background-color: var(--quaternary);
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  display: inline-block;
+  padding-left: 8%;
+  padding-right: 8%;
+}
+/*input && select-kit  border*/
+.ios-device input[type="text"] {
+  border-radius: 8px;
+  border: 1px solid var(--primary-medium);
+}
+.ios-device .select-kit .select-kit-header {
+  border-radius: 8px;
+}
+/** account page padding reset*/
+.my-account-page {
+  padding-left: 5%;
+}
+/*topic progress*/
+#topic-progress {
+  position: absolute;
+  bottom: 5.5em;
+  right: 0em;
+  opacity: 50%;
+}
