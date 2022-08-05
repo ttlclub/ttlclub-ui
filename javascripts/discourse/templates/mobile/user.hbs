@@ -325,11 +325,13 @@
 
               <div class="secondary" id="collapsed-info-panel">
                 <dl>
-                  {{!-- {{#if model.created_at}}
-                    <div><dt>{{i18n "user.created"}}</dt><dd>{{bound-date
-                          model.created_at
-                        }}</dd></div>
-                  {{/if}} --}}
+                  {{#if showBookmarks}}
+                    {{#if model.created_at}}
+                      <div><dt>{{i18n "user.created"}}</dt><dd>{{bound-date
+                            model.created_at
+                          }}</dd></div>
+                    {{/if}}
+                  {{/if}}
                   {{#if model.last_posted_at}}
                     <div><dt>{{i18n "user.last_posted"}}</dt><dd>{{bound-date
                           model.last_posted_at
@@ -808,10 +810,12 @@
 
             <div class="secondary" id="collapsed-info-panel">
               <dl>
-                {{#if model.created_at}}
-                  <div><dt>{{i18n "user.created"}}</dt><dd>{{bound-date
-                        model.created_at
-                      }}</dd></div>
+                {{#if showBookmarks}}
+                  {{#if model.created_at}}
+                    <div><dt>{{i18n "user.created"}}</dt><dd>{{bound-date
+                          model.created_at
+                        }}</dd></div>
+                  {{/if}}
                 {{/if}}
                 {{#if model.last_posted_at}}
                   <div><dt>{{i18n "user.last_posted"}}</dt><dd>{{bound-date
