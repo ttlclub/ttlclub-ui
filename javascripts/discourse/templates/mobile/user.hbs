@@ -325,10 +325,13 @@
 
               <div class="secondary" id="collapsed-info-panel">
                 <dl>
-                  {{#if model.created_at}}
-                    <div><dt>{{i18n "user.created"}}</dt><dd>{{bound-date
-                          model.created_at
-                        }}</dd></div>
+                  <!--设置用户创建日期仅自己和管理员可见-->
+                  {{#if canCheckEmails}}
+                    {{#if model.created_at}}
+                      <div><dt>{{i18n "user.created"}}</dt><dd>{{bound-date
+                            model.created_at
+                          }}</dd></div>
+                    {{/if}}
                   {{/if}}
                   {{#if model.last_posted_at}}
                     <div><dt>{{i18n "user.last_posted"}}</dt><dd>{{bound-date
