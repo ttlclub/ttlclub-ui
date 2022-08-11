@@ -14,8 +14,9 @@
       {{#d-navigation-item route="userActivity.topics"}}{{i18n
           "user_action_groups.4"
         }}{{/d-navigation-item}}
-      {{! 只有自己能看赞和回复 }}
-      {{#if canDownloadPosts}}
+
+      {{! 只有自己和管理能看赞和回复 }}
+      {{#if user.showBookmarks}}
         {{#d-navigation-item route="userActivity.likesGiven"}}{{i18n
             "user_action_groups.1"
           }}{{/d-navigation-item}}
