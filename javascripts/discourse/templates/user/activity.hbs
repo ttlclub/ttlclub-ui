@@ -14,13 +14,15 @@
       {{#d-navigation-item route="userActivity.topics"}}{{i18n
           "user_action_groups.4"
         }}{{/d-navigation-item}}
-
-      {{#d-navigation-item route="userActivity.likesGiven"}}{{i18n
-          "user_action_groups.1"
-        }}{{/d-navigation-item}}
-      {{#d-navigation-item route="userActivity.replies"}}{{i18n
-          "user_action_groups.5"
-        }}{{/d-navigation-item}}
+      {{! 只有自己能看赞和回复 }}
+      {{#if canDownloadPosts}}
+        {{#d-navigation-item route="userActivity.likesGiven"}}{{i18n
+            "user_action_groups.1"
+          }}{{/d-navigation-item}}
+        {{#d-navigation-item route="userActivity.replies"}}{{i18n
+            "user_action_groups.5"
+          }}{{/d-navigation-item}}
+      {{/if}}
 
       {{#if user.showBookmarks}}
         {{#d-navigation-item route="userActivity.bookmarks"}}{{i18n
