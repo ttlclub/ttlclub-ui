@@ -229,23 +229,26 @@
       </div>
     </div>
   {{/if}}
-  <!-- 头像框选择器 -->
 
-  <div class="control-group pref-flair">
-    <label class="control-label">{{i18n "user.flair.title"}}</label>
-    <div class="controls">
-      {{ttl-avatar-frame-chooser
-        value=newFlairGroupId
-        content=model.availableFlairs
-        onChange=(action (mut newFlairGroupId))
-        options=(hash none="user.flair.none")
-      }}
-    </div>
-    <div class="instructions">
-      <a href="/g" style="color:var(--tertiary)">如何领取？</a>
-    </div>
+</div>
+<!-- 头像框选择器 -->
+
+<div class="control-group pref-flair">
+  <label class="control-label">{{i18n "user.flair.title"}}</label>
+  <div class="controls">
+    {{ttl-avatar-frame-chooser
+      value=newFlairGroupId
+      content=model.availableFlairs
+      onChange=(action (mut newFlairGroupId))
+      options=(hash none="user.flair.none")
+    }}
   </div>
+  <div class="instructions">
+    <a href="/g" style="color:var(--tertiary)">如何领取？</a>
+  </div>
+</div>
 
+<div class="my-account-page">
   {{#if canSelectPrimaryGroup}}
     <div class="control-group pref-primary-group">
       <label class="control-label">{{i18n "user.primary_group.title"}}</label>
