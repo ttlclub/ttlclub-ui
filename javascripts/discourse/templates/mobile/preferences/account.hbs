@@ -3,7 +3,7 @@
     <label class="control-label">{{i18n "user.username.title"}}</label>
     <div class="controls">
       <span class="static">{{model.username}}</span>
-      {{#if model.can_edit_username}}
+      {{!-- {{#if model.can_edit_username}}
         {{#link-to
           "preferences.username"
           name=(i18n "user.username.edit")
@@ -11,7 +11,7 @@
         }}
           {{d-icon "pencil-alt"}}
         {{/link-to}}
-      {{/if}}
+      {{/if}} --}}
     </div>
     {{#if siteSettings.enable_mentions}}
       <div class="instructions">
